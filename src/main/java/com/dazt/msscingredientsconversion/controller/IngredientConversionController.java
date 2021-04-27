@@ -37,7 +37,7 @@ public class IngredientConversionController {
 
         return new IngredientsConversionDTO(ingredientsConversionDTO.getFrom(), ingredientsConversionDTO.getTo(), quantity,
                 ingredientsConversionDTO.getConversionFactor(), ingredientsConversionDTO.getConversionFactor().multiply(quantity),
-                ingredientsConversionDTO.getLastUpdatedDate(), ingredientsConversionDTO.getCreationDate());
+                ingredientsConversionDTO.getHostPort(), ingredientsConversionDTO.getLastUpdatedDate(), ingredientsConversionDTO.getCreationDate());
     }
 
     @GetMapping("/ingredient-conversion-feign/from/{from}/to/{to}/quantity/{quantity}/")
@@ -51,6 +51,6 @@ public class IngredientConversionController {
 
         return new IngredientsConversionDTO(ingredientsConversionDTO.getFrom(), ingredientsConversionDTO.getTo(), quantity,
                 ingredientsConversionDTO.getConversionFactor(), ingredientsConversionDTO.getConversionFactor().multiply(quantity),
-                ingredientsConversionDTO.getLastUpdatedDate(), ingredientsConversionDTO.getCreationDate());
+                ingredientsConversionDTO.getHostPort(), ingredientsConversionDTO.getLastUpdatedDate(), ingredientsConversionDTO.getCreationDate());
     }
 }

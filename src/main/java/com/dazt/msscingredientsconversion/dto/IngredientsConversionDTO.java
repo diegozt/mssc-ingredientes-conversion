@@ -24,6 +24,8 @@ public class IngredientsConversionDTO {
 
     private BigDecimal totalCalculatedAmount;
 
+    private String hostPort;
+
     private OffsetDateTime lastUpdatedDate;
 
     private OffsetDateTime creationDate;
