@@ -3,7 +3,7 @@ package com.dazt.msscingredientsconversion.controller;
 
 import com.dazt.msscingredientsconversion.dto.IngredientsConversionDTO;
 import com.dazt.msscingredientsconversion.proxy.IngredientConversionProxy;
-import io.github.resilience4j.retry.annotation.Retry;
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -45,14 +45,17 @@ public class IngredientConversionController {
 
 
     @GetMapping("/ingredient-conversion-feign/from/{from}/to/{to}/quantity/{quantity}/")
-    @Retry(name = "retry-times", fallbackMethod = "unavailableServiceError")
+    //@Retry(name = "retry-times", fallbackMethod = "unavailableServiceError")
+    //@CircuitBreaker(name = "default", fallbackMethod = "unavailableServiceError")
+    //@RateLimiter(name = "default")
+    @Bulkhead(name = "default")
     public IngredientsConversionDTO calculateIngredientConversionFeign(
             @PathVariable String from,
             @PathVariable String to,
             @PathVariable BigDecimal quantity
     ) {
 
-        log.info("Invoking method: {}", "calculateIngredientConversionFeign");
+        log.info("Invoking method: {} with the parameters: {} - {}", "calculateIngredientConversionFeign", from, to);
 
         IngredientsConversionDTO ingredientsConversionDTO = proxy.retrieveMeasureValue(from, to);
 
